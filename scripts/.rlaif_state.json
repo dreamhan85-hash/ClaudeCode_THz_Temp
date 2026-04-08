@@ -1,0 +1,2724 @@
+{
+  "iteration": 434,
+  "max_iterations": 200,
+  "started_at": "2026-04-03T20:19:55.795773",
+  "best_score": 100,
+  "best_r2": 0.9624,
+  "features_found": [
+    "H_amp_0.5",
+    "H_amp_1.0",
+    "H_amp_1.5",
+    "H_amp_mean",
+    "H_phase_0.5",
+    "H_phase_1.0",
+    "H_phase_1.5",
+    "absorption_integral",
+    "amp_env_peak",
+    "amp_neg",
+    "amp_pos",
+    "amp_ratio_neg",
+    "amp_ratio_pos",
+    "delta_area",
+    "delta_energy",
+    "delta_max",
+    "delta_min",
+    "delta_p2p",
+    "delta_rms",
+    "dt_env",
+    "dt_neg",
+    "dt_pos",
+    "dt_zero_cross",
+    "energy_ratio",
+    "env_fwhm_ps",
+    "group_delay_ps",
+    "p2p",
+    "p2p_ratio",
+    "phase_intercept",
+    "phase_slope",
+    "pulse_area",
+    "pulse_energy",
+    "pulse_kurtosis",
+    "pulse_rms",
+    "ref_amp_env_peak",
+    "ref_amp_neg",
+    "ref_amp_pos",
+    "ref_env_fwhm_ps",
+    "ref_p2p",
+    "ref_pulse_area",
+    "ref_pulse_energy",
+    "ref_pulse_kurtosis",
+    "ref_pulse_rms",
+    "ref_rise_time_ps",
+    "ref_t_env_peak",
+    "ref_t_neg",
+    "ref_t_neg_minus_pos",
+    "ref_t_pos",
+    "ref_t_zero_cross",
+    "rise_time_ps",
+    "spectral_centroid_thz",
+    "t_delta_max",
+    "t_delta_min",
+    "t_env_peak",
+    "t_neg",
+    "t_neg_minus_pos",
+    "t_pos",
+    "t_zero_cross",
+    "H_amp_0.3",
+    "H_amp_0.7",
+    "H_amp_1.3",
+    "H_amp_2.0",
+    "H_amp_highband",
+    "H_amp_lowband",
+    "H_amp_max",
+    "H_amp_midband",
+    "H_amp_min",
+    "H_amp_slope",
+    "H_phase_0.3",
+    "H_phase_0.7",
+    "H_phase_1.3",
+    "H_phase_2.0",
+    "area_ratio",
+    "bandwidth_ref_thz",
+    "bandwidth_sam_thz",
+    "centroid_ref_thz",
+    "centroid_sam_thz",
+    "centroid_shift_thz",
+    "delta_centroid_ps",
+    "delta_pos_neg_ratio",
+    "dt_max_slope",
+    "dt_min_slope",
+    "env_asymmetry",
+    "env_fall_time_ps",
+    "env_rise_time_ps",
+    "fwhm_ratio",
+    "max_curvature",
+    "max_slope",
+    "min_slope",
+    "noise_rms",
+    "phase_residual_rms",
+    "pulse_skewness",
+    "ref_env_asymmetry",
+    "ref_env_fall_time_ps",
+    "ref_env_rise_time_ps",
+    "ref_max_curvature",
+    "ref_max_slope",
+    "ref_min_slope",
+    "ref_noise_rms",
+    "ref_pulse_skewness",
+    "ref_snr",
+    "ref_t_max_slope",
+    "ref_t_min_slope",
+    "slope_ratio_max",
+    "slope_ratio_min",
+    "snr",
+    "snr_ratio",
+    "t_max_slope",
+    "t_min_slope"
+  ],
+  "history": [
+    {
+      "iteration": 1,
+      "score": 100,
+      "file": "temp_correlation.py",
+      "n_features": 58
+    },
+    {
+      "iteration": 2,
+      "score": 100,
+      "file": "temp_correlation.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 3,
+      "score": 100,
+      "file": "generate_full_report.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 4,
+      "score": 100,
+      "file": "generate_full_report.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 5,
+      "score": 100,
+      "file": "generate_full_report.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 6,
+      "score": 100,
+      "file": "generate_full_report.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 7,
+      "score": 100,
+      "file": "generate_full_report.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 8,
+      "score": 100,
+      "file": "generate_full_report.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 9,
+      "score": 100,
+      "file": "generate_full_report.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 10,
+      "score": 100,
+      "file": "generate_full_report.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 11,
+      "score": 100,
+      "file": "generate_full_report.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 12,
+      "score": 100,
+      "file": "generate_full_report.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 13,
+      "score": 100,
+      "file": "generate_full_report.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 14,
+      "score": 100,
+      "file": "generate_full_report.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 15,
+      "score": 100,
+      "file": "generate_full_report.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 16,
+      "score": 100,
+      "file": "generate_full_report.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 17,
+      "score": 100,
+      "file": "generate_full_report.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 18,
+      "score": 100,
+      "file": "generate_full_report.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 19,
+      "score": 100,
+      "file": "generate_full_report.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 20,
+      "score": 100,
+      "file": "analyze_pe40_temp.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 21,
+      "score": 100,
+      "file": "generate_pe40_report_docx.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 22,
+      "score": 100,
+      "file": "analyze_pe40_temp.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 23,
+      "score": 100,
+      "file": "analyze_pe40_temp.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 24,
+      "score": 100,
+      "file": "analyze_pe40_temp.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 25,
+      "score": 100,
+      "file": "generate_pe40_report_docx.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 26,
+      "score": 100,
+      "file": "analyze_pe40_temp.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 27,
+      "score": 100,
+      "file": "analyze_pe40_temp.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 28,
+      "score": 100,
+      "file": "analyze_pe40_temp.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 29,
+      "score": 100,
+      "file": "analyze_pe40_temp.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 30,
+      "score": 100,
+      "file": "analyze_pe40_temp.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 31,
+      "score": 100,
+      "file": "analyze_pe40_temp.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 32,
+      "score": 100,
+      "file": "analyze_pe40_temp.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 33,
+      "score": 100,
+      "file": "analyze_pe40_temp.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 34,
+      "score": 100,
+      "file": "analyze_pe40_temp.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 35,
+      "score": 100,
+      "file": "generate_pe40_report_docx.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 36,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 37,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 38,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 39,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 40,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 41,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 42,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 43,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 44,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 45,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 46,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 47,
+      "score": 100,
+      "file": "generate_pe40_paper_report.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 48,
+      "score": 100,
+      "file": "generate_pe40_paper_report.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 49,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 50,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 51,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 52,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 53,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 54,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 55,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 56,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 57,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 58,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 59,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 60,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 61,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 62,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 63,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 64,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 65,
+      "score": 100,
+      "file": "generate_pe40_paper_report.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 66,
+      "score": 100,
+      "file": "generate_pe40_paper_report.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 67,
+      "score": 100,
+      "file": "generate_pe40_paper_report.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 68,
+      "score": 100,
+      "file": "generate_pe40_paper_report.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 69,
+      "score": 100,
+      "file": "generate_pe40_paper_report.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 70,
+      "score": 100,
+      "file": "generate_pe40_paper_report.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 71,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 72,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 73,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 74,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 75,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 76,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 77,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 78,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 79,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 80,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 81,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 82,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 83,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 84,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 85,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 86,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 87,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 88,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 89,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 90,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 91,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 92,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 93,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 94,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 95,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 96,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 97,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 98,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 99,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 100,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 101,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 102,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 103,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 104,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 105,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 106,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 107,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 108,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 109,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 110,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 111,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 112,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 113,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 114,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 115,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 116,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 117,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 118,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 119,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 120,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 121,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 122,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 123,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 124,
+      "score": 100,
+      "file": "predict_temperature.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 125,
+      "score": 100,
+      "file": "predict_temperature.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 126,
+      "score": 100,
+      "file": "predict_temperature.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 127,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 128,
+      "score": 100,
+      "file": "predict_temperature.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 129,
+      "score": 100,
+      "file": "predict_temperature.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 130,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 131,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 132,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 133,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 134,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 135,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 136,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 137,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 138,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 139,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 140,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 141,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 142,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 143,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 144,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 145,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 146,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 147,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 148,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 149,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 150,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 151,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 152,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 153,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 154,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 155,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 156,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 157,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 158,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 159,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 160,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 161,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 162,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 163,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 164,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 165,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 166,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 167,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 168,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 169,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 170,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 171,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 172,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 173,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 174,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 175,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 176,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 177,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 178,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 179,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 180,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 181,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 182,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 183,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 184,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 185,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 186,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 187,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 188,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 189,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 190,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 191,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 192,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 193,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 194,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 195,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 196,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 197,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 198,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 199,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 200,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 201,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 202,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 203,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 204,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 205,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 206,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 207,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 208,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 209,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 210,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 211,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 212,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 213,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 214,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 215,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 216,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 217,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 218,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 219,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 220,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 221,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 222,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 223,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 224,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 225,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 226,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 227,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 228,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 229,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 230,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 231,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 232,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 233,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 234,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 235,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 236,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 237,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 238,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 239,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 240,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 241,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 242,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 243,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 244,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 245,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 246,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 247,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 248,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 249,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 250,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 251,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 252,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 253,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 254,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 255,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 256,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 257,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 258,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 259,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 260,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 261,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 262,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 263,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 264,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 265,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 266,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 267,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 268,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 269,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 270,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 271,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 272,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 273,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 274,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 275,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 276,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 277,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 278,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 279,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 280,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 281,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 282,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 283,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 284,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 285,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 286,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 287,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 288,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 289,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 290,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 291,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 292,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 293,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 294,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 295,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 296,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 297,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 298,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 299,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 300,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 301,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 302,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 303,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 304,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 305,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 306,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 307,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 308,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 309,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 310,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 311,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 312,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 313,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 314,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 315,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 316,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 317,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 318,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 319,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 320,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 321,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 322,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 323,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 324,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 325,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 326,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 327,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 328,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 329,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 330,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 331,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 332,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 333,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 334,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 335,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 336,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 337,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 338,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 339,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 340,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 341,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 342,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 343,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 344,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 345,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 346,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 347,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 348,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 349,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 350,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 351,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 352,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 353,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 354,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 355,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 356,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 357,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 358,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 359,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 360,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 361,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 362,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 363,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 364,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 365,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 366,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 367,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 368,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 369,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 370,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 371,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 372,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 373,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 374,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 375,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 376,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 377,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 378,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 379,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 380,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 381,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 382,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 383,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 384,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 385,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 386,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 387,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 388,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 389,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 390,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 391,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 392,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 393,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 394,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 395,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 396,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 397,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 398,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 399,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 400,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 401,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 402,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 403,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 404,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 405,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 406,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 407,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 408,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 409,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 410,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 411,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 412,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 413,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 414,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 415,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 416,
+      "score": 100,
+      "file": "generate_paper_sna.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 417,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 418,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 419,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 420,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 421,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 422,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 423,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 424,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 425,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 426,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 427,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 428,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 429,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 430,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 431,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 432,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 433,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 434,
+      "score": 100,
+      "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    }
+  ]
+}

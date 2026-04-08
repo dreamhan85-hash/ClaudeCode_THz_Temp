@@ -1,0 +1,4 @@
+Frequency (THz),F-statistic,p-value,Significance,eta_squared,n_groups,n_total
+0.454,12.78,2.84e-09,***,0.7420,10,50
+1.095,2.95,8.83e-03,**,0.3987,10,50
+1.630,5.08,1.37e-04,***,0.5334,10,50

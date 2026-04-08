@@ -11,9 +11,18 @@ from .types import (
     THzFrequencyDomainData,
     OpticalProperties,
     ExtractionConfig,
+    NoiseAnalysis,
+    SvmafConfig,
+    ThicknessOptConfig,
+    ThicknessResult,
 )
 from .signal import apply_window, compute_fft
 from .optimization import extract_optical_properties
+from .noise import detect_noise_floor
+from .phase_correction import correct_phase_offset
+from .filtering import svmaf_filter_properties
+from .thickness import optimize_thickness
+from .error_estimation import compute_confidence_intervals, compute_alpha_max
 
 
 def process_single_measurement(
@@ -115,6 +124,68 @@ def process_temperature_series(
 
             if progress_callback:
                 progress_callback(i + 1, total)
+
+    return results
+
+
+def process_temperature_series_matched_ref(
+    references: dict[int, THzTimeDomainData],
+    samples: dict[tuple[int, int], THzTimeDomainData],
+    config: ExtractionConfig,
+    progress_callback: Callable | None = None,
+) -> dict[tuple[int, int], OpticalProperties]:
+    """Batch process using per-temperature matched references.
+
+    Each sample at temperature T is divided by Ref_T.
+    No air temperature correction needed (same-temperature measurement).
+
+    Args:
+        references: dict mapping temperature -> reference THzTimeDomainData
+        samples: dict mapping (temperature, replicate) -> THzTimeDomainData
+        config: Extraction configuration (apply_air_correction ignored).
+    """
+    results: dict[tuple[int, int], OpticalProperties] = {}
+    total = len(samples)
+
+    # Pre-compute reference FFTs
+    ref_cache: dict[int, tuple[THzTimeDomainData, THzFrequencyDomainData]] = {}
+    for temp, ref_td in references.items():
+        ref_windowed = apply_window(ref_td, config.window_type)
+        ref_freq = compute_fft(ref_windowed, config.zero_pad_factor)
+        ref_cache[temp] = (ref_td, ref_freq)
+
+    # Override air correction (same temp ref/sample → no correction needed)
+    cfg_no_air = ExtractionConfig(
+        thickness_mm=config.thickness_mm,
+        freq_min_thz=config.freq_min_thz,
+        freq_max_thz=config.freq_max_thz,
+        n_fp_echoes=config.n_fp_echoes,
+        window_type=config.window_type,
+        zero_pad_factor=config.zero_pad_factor,
+        n_initial_guess=config.n_initial_guess,
+        kappa_initial_guess=config.kappa_initial_guess,
+        thin_film=config.thin_film,
+        ref_temperature_c=config.ref_temperature_c,
+        chamber_length_cm=config.chamber_length_cm,
+        total_path_cm=config.total_path_cm,
+        apply_air_correction=False,
+    )
+
+    for i, ((temp, rep), sample_data) in enumerate(sorted(samples.items())):
+        if temp not in ref_cache:
+            continue
+
+        ref_td, ref_freq = ref_cache[temp]
+        sample_windowed = apply_window(sample_data, config.window_type)
+        sample_freq = compute_fft(sample_windowed, cfg_no_air.zero_pad_factor)
+
+        props = extract_optical_properties(
+            ref_td, sample_data, ref_freq, sample_freq, cfg_no_air
+        )
+        results[(temp, rep)] = props
+
+        if progress_callback:
+            progress_callback(i + 1, total)
 
     return results
 

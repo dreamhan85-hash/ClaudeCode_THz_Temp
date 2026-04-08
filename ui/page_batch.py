@@ -10,6 +10,7 @@ import plotly.graph_objects as go
 from thztds.types import ExtractionConfig, THzTimeDomainData, OpticalProperties
 from thztds.optical_properties import (
     process_temperature_series,
+    process_temperature_series_matched_ref,
     compute_temperature_averages,
 )
 from ui.plots import (
@@ -20,15 +21,19 @@ from ui.plots import (
 
 
 def render_batch_analysis(
-    ref_data: THzTimeDomainData,
+    ref_data: THzTimeDomainData | None,
     sample_dict: dict[tuple[int, int], THzTimeDomainData],
     config: ExtractionConfig,
     analysis_method: str = "method2",
+    ref_dict: dict[int, THzTimeDomainData] | None = None,
 ):
     """Render the batch / temperature comparison page."""
     st.header("Temperature Comparison Analysis")
 
-    if analysis_method == "method3":
+    if analysis_method == "matched_ref":
+        ref_temps = sorted(ref_dict.keys()) if ref_dict else []
+        st.caption(f"📊 Matched Ref: H = E_sam(T)/E_ref(T) — 온도별 Ref 매칭 ({len(ref_temps)}개: {ref_temps}°C)")
+    elif analysis_method == "method3":
         st.caption("📊 Method 3: Differential — H = E_sam(T)/E_sam(T_base), 상대 변화량 추출")
     else:
         st.caption("📊 Method 2: Air Ref + Correction — H = E_sam(T)/E_ref(20°C), 절대 물성 추출")
@@ -73,13 +78,20 @@ def render_batch_analysis(
 
     # Time-domain comparison (before extraction)
     st.subheader("Time-Domain Signals (Temperature Comparison)")
-    col_td1, col_td2 = st.columns(2)
-    with col_td1:
-        fig_td = _plot_time_domain_comparison(ref_data, filtered_samples)
-        st.plotly_chart(fig_td, use_container_width=True)
-    with col_td2:
-        fig_td_delta = _plot_time_domain_delta(ref_data, filtered_samples)
-        st.plotly_chart(fig_td_delta, use_container_width=True)
+
+    # Pick a representative ref for time-domain plots
+    td_ref = ref_data
+    if td_ref is None and ref_dict:
+        td_ref = ref_dict[min(ref_dict.keys())]
+
+    if td_ref is not None:
+        col_td1, col_td2 = st.columns(2)
+        with col_td1:
+            fig_td = _plot_time_domain_comparison(td_ref, filtered_samples)
+            st.plotly_chart(fig_td, use_container_width=True)
+        with col_td2:
+            fig_td_delta = _plot_time_domain_delta(td_ref, filtered_samples)
+            st.plotly_chart(fig_td_delta, use_container_width=True)
 
     # Run batch analysis
     if st.button("Run Batch Analysis", key="run_batch"):
@@ -91,11 +103,17 @@ def render_batch_analysis(
             status_text.text(f"Processing sample {current}/{total}...")
 
         with st.spinner("Processing all samples..."):
-            results = process_temperature_series(
-                ref_data, filtered_samples, config,
-                progress_callback=progress_cb,
-                analysis_method=analysis_method,
-            )
+            if analysis_method == "matched_ref" and ref_dict:
+                results = process_temperature_series_matched_ref(
+                    ref_dict, filtered_samples, config,
+                    progress_callback=progress_cb,
+                )
+            else:
+                results = process_temperature_series(
+                    ref_data, filtered_samples, config,
+                    progress_callback=progress_cb,
+                    analysis_method=analysis_method,
+                )
 
         progress_bar.progress(1.0)
         status_text.text("Batch processing complete!")
