@@ -56,9 +56,11 @@ def render_sidebar():
 
     Returns:
         config: ExtractionConfig
-        ref_data: THzTimeDomainData or None
+        ref_data: THzTimeDomainData or None (single ref for Method 2/3)
         sample_data_list: list of THzTimeDomainData
         data_source: "upload" or "directory"
+        method_key: "method2", "method3", or "matched_ref"
+        ref_dict: dict[int, THzTimeDomainData] or None (per-temperature refs)
     """
     st.sidebar.title("THz-TDS Analyzer")
     st.sidebar.markdown("---")
@@ -72,13 +74,16 @@ def render_sidebar():
     )
 
     ref_data = None
+    ref_dict = None
     sample_data_list = []
 
     if data_source == "Upload Files":
-        ref_file = st.sidebar.file_uploader(
-            "Reference Signal (.txt)",
+        ref_files = st.sidebar.file_uploader(
+            "Reference Signal(s) (.txt)",
             type=["txt"],
+            accept_multiple_files=True,
             key="ref_upload",
+            help="1개 업로드: 단일 Ref 모드 | 여러 개(Ref_30.txt, Ref_40.txt, ...): 온도별 매칭 모드",
         )
         sample_files = st.sidebar.file_uploader(
             "Sample Signal(s) (.txt)",
@@ -87,8 +92,29 @@ def render_sidebar():
             key="sample_upload",
         )
 
-        if ref_file is not None:
-            ref_data = _parse_uploaded_file(ref_file)
+        if ref_files:
+            if len(ref_files) == 1:
+                ref_data = _parse_uploaded_file(ref_files[0])
+            else:
+                # Multiple refs → build per-temperature dict
+                ref_dict = {}
+                for rf in ref_files:
+                    rd = _parse_uploaded_file(rf)
+                    temp = rd.metadata.get("temperature_c")
+                    if temp is not None:
+                        ref_dict[temp] = rd
+                    else:
+                        # Fallback: use as single ref if no temp in filename
+                        if ref_data is None:
+                            ref_data = rd
+                if ref_dict:
+                    # Also set the lowest-temp ref as single ref fallback
+                    lowest = min(ref_dict.keys())
+                    ref_data = ref_dict[lowest]
+                    st.sidebar.success(
+                        f"Ref {len(ref_dict)}개 로딩: {sorted(ref_dict.keys())}°C"
+                    )
+
         if sample_files:
             for sf in sample_files:
                 sample_data_list.append(_parse_uploaded_file(sf))
@@ -100,19 +126,26 @@ def render_sidebar():
             key="dir_path",
         )
         if dir_path and st.sidebar.button("Load Directory", key="load_dir"):
-            from thztds.io import load_measurement_set
+            from thztds.io import load_measurement_set, load_measurement_set_with_refs
 
             p = Path(dir_path)
             if not p.is_absolute():
                 p = Path.cwd() / p
             if p.exists():
                 ref, samples = load_measurement_set(p)
-                if ref is not None:
+                refs_multi, samples_multi = load_measurement_set_with_refs(p)
+                if ref is not None or refs_multi:
                     st.session_state["ref_data"] = ref
-                    st.session_state["sample_dict"] = samples
-                    st.sidebar.success(
-                        f"Loaded reference + {len(samples)} samples"
-                    )
+                    st.session_state["sample_dict"] = samples if samples else samples_multi
+                    if len(refs_multi) > 1:
+                        st.session_state["ref_dict"] = refs_multi
+                        st.sidebar.success(
+                            f"Ref {len(refs_multi)}개 + {len(samples_multi)} samples"
+                        )
+                    else:
+                        st.sidebar.success(
+                            f"Loaded reference + {len(samples)} samples"
+                        )
                 else:
                     st.sidebar.error("No reference file found in directory.")
             else:
@@ -123,6 +156,8 @@ def render_sidebar():
             ref_data = st.session_state["ref_data"]
         if "sample_dict" in st.session_state:
             sample_data_list = list(st.session_state["sample_dict"].values())
+        if "ref_dict" in st.session_state:
+            ref_dict = st.session_state["ref_dict"]
 
     st.sidebar.markdown("---")
 
@@ -176,13 +211,20 @@ def render_sidebar():
 
     # Analysis method
     st.sidebar.subheader("Analysis Method")
+    method_options = [
+        "Method 2: Air Ref + Correction",
+        "Method 3: Differential (ΔSample)",
+    ]
+    if ref_dict and len(ref_dict) > 1:
+        method_options.insert(0, "Matched Ref: 온도별 Ref 매칭")
     analysis_method = st.sidebar.radio(
         "Transfer Function Reference",
-        ["Method 2: Air Ref + Correction", "Method 3: Differential (ΔSample)"],
+        method_options,
         index=0,
         help=(
+            "Matched Ref: H = E_sam(T)/E_ref(T) → 동일 온도 Ref (공기 보정 불필요)\n"
             "Method 2: H = E_sam(T)/E_ref(20°C) × air correction → 절대 물성\n"
-            "Method 3: H = E_sam(T)/E_sam(T_base) → 상대 변화량 (공기 영향 상쇄)"
+            "Method 3: H = E_sam(T)/E_sam(T_base) → 상대 변화량"
         ),
     )
 
@@ -263,5 +305,10 @@ def render_sidebar():
         apply_air_correction=apply_air_correction,
     )
 
-    method_key = "method3" if "Method 3" in analysis_method else "method2"
-    return config, ref_data, sample_data_list, data_source, method_key
+    if "Matched Ref" in analysis_method:
+        method_key = "matched_ref"
+    elif "Method 3" in analysis_method:
+        method_key = "method3"
+    else:
+        method_key = "method2"
+    return config, ref_data, sample_data_list, data_source, method_key, ref_dict

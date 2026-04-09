@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Union
 
 import numpy as np
+from numpy.typing import NDArray
 import pandas as pd
 
 from .types import THzTimeDomainData, OpticalProperties
@@ -83,24 +84,75 @@ def load_measurement_set(
 
     Returns:
         reference: THzTimeDomainData for Ref_*.txt (or None if not found)
+            If multiple Ref files exist, returns the lowest-temperature one.
         samples: dict mapping (temperature, replicate) -> THzTimeDomainData
     """
     directory = Path(directory)
-    reference = None
+    references: dict[int, THzTimeDomainData] = {}
     samples: dict[tuple[int, int], THzTimeDomainData] = {}
 
     for filepath in sorted(directory.glob("*.txt")):
+        if "_fft" in filepath.name:
+            continue
         meta = parse_filename_metadata(filepath.name)
         if meta.get("is_reference"):
-            reference = parse_menlo_file(filepath)
-            reference.metadata.update(meta)
+            data = parse_menlo_file(filepath)
+            data.metadata.update(meta)
+            references[meta["temperature_c"]] = data
         elif "temperature_c" in meta and "replicate" in meta:
             data = parse_menlo_file(filepath)
             data.metadata.update(meta)
             key = (meta["temperature_c"], meta["replicate"])
             samples[key] = data
 
+    # Return lowest-temperature reference for backward compatibility
+    reference = None
+    if references:
+        lowest_temp = min(references.keys())
+        reference = references[lowest_temp]
+
     return reference, samples
+
+
+def load_measurement_set_with_refs(
+    directory: str | Path,
+    exclude_temps: list[int] | None = None,
+) -> tuple[dict[int, THzTimeDomainData], dict[tuple[int, int], THzTimeDomainData]]:
+    """Load all files with per-temperature references.
+
+    Args:
+        directory: Path to measurement directory.
+        exclude_temps: Temperatures to exclude (e.g., [20] if Ref_20 missing).
+
+    Returns:
+        references: dict mapping temperature -> THzTimeDomainData
+        samples: dict mapping (temperature, replicate) -> THzTimeDomainData
+    """
+    directory = Path(directory)
+    exclude = set(exclude_temps or [])
+    references: dict[int, THzTimeDomainData] = {}
+    samples: dict[tuple[int, int], THzTimeDomainData] = {}
+
+    for filepath in sorted(directory.glob("*.txt")):
+        if "_fft" in filepath.name:
+            continue
+        meta = parse_filename_metadata(filepath.name)
+        temp = meta.get("temperature_c")
+
+        if temp is not None and temp in exclude:
+            continue
+
+        if meta.get("is_reference"):
+            data = parse_menlo_file(filepath)
+            data.metadata.update(meta)
+            references[temp] = data
+        elif temp is not None and "replicate" in meta:
+            data = parse_menlo_file(filepath)
+            data.metadata.update(meta)
+            key = (temp, meta["replicate"])
+            samples[key] = data
+
+    return references, samples
 
 
 def export_results_csv(

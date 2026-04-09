@@ -56,6 +56,41 @@ class OpticalProperties:
 
 
 @dataclass
+class NoiseAnalysis:
+    """Results from noise floor detection."""
+    noise_floor: float
+    noise_start_thz: float
+    dynamic_range_db: NDArray[np.float64]
+    snr_spectrum: NDArray[np.float64]
+    valid_freq_mask: NDArray[np.bool_]
+
+
+@dataclass
+class SvmafConfig:
+    """Configuration for Spatially Variant Moving Average Filter."""
+    max_window_size: int = 15
+    confidence_sigma: float = 2.0
+
+
+@dataclass
+class ThicknessOptConfig:
+    """Configuration for thickness optimization."""
+    center_um: float = 20.0
+    interval_um: float = 5.0
+    step_um: float = 0.5
+    method: str = "quasi_space"  # "quasi_space" or "total_variation"
+
+
+@dataclass
+class ThicknessResult:
+    """Results from thickness optimization."""
+    optimal_thickness_um: float
+    all_thicknesses_um: NDArray[np.float64]
+    merit_values: NDArray[np.float64]
+    method: str
+
+
+@dataclass
 class ExtractionConfig:
     """Parameters controlling the extraction algorithm."""
     thickness_mm: float = 1.0

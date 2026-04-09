@@ -14,7 +14,7 @@ from ui.page_batch import render_batch_analysis
 
 
 def main():
-    config, ref_data, sample_data_list, data_source, analysis_method = render_sidebar()
+    config, ref_data, sample_data_list, data_source, analysis_method, ref_dict = render_sidebar()
 
     # Main area tabs
     tab_single, tab_batch = st.tabs(["Single Analysis", "Batch / Temperature"])
@@ -39,10 +39,17 @@ def main():
                 idx = sample_names.index(selected_name)
                 selected_sample = sample_data_list[idx]
 
-            render_single_analysis(ref_data, selected_sample, config)
+            # For single analysis with matched ref, pick the matching temperature ref
+            single_ref = ref_data
+            if analysis_method == "matched_ref" and ref_dict:
+                sam_temp = selected_sample.metadata.get("temperature_c")
+                if sam_temp is not None and sam_temp in ref_dict:
+                    single_ref = ref_dict[sam_temp]
+
+            render_single_analysis(single_ref, selected_sample, config)
 
     with tab_batch:
-        if ref_data is None:
+        if ref_data is None and not ref_dict:
             st.info("Please load a reference signal from the sidebar.")
         elif data_source == "Upload Files":
             # Build sample dict from uploaded files
@@ -57,13 +64,15 @@ def main():
                     temp = s.metadata.get("temperature_c", 0)
                     rep = s.metadata.get("replicate", 1)
                     sample_dict[(temp, rep)] = s
-                render_batch_analysis(ref_data, sample_dict, config, analysis_method)
+                render_batch_analysis(
+                    ref_data, sample_dict, config, analysis_method, ref_dict,
+                )
         else:
             # Directory mode - use session state
             if "sample_dict" in st.session_state:
                 render_batch_analysis(
                     ref_data, st.session_state["sample_dict"], config,
-                    analysis_method,
+                    analysis_method, ref_dict,
                 )
             else:
                 st.info("Please load data from a directory using the sidebar.")
