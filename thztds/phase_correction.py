@@ -1,88 +1,69 @@
-"""Phase offset correction for THz-TDS transfer functions.
+"""Phase offset correction for THz-TDS frequency-domain data."""
 
-Based on TeraLyzer's phase offset removal:
-- Linear fit in trusted frequency interval
-- Extrapolation to 0 Hz
-- Correction within ±2π window
-"""
 from __future__ import annotations
 
 import numpy as np
 from numpy.typing import NDArray
 
-from .constants import PI
-
-
-def compute_phase_offset(
-    freq_hz: NDArray[np.float64],
-    phase: NDArray[np.float64],
-    trusted_range_thz: tuple[float, float] = (0.3, 1.0),
-) -> float:
-    """Compute the phase offset at 0 Hz by linear extrapolation.
-
-    Fits a line to the unwrapped phase in the trusted frequency interval,
-    then extrapolates to 0 Hz.
-
-    Args:
-        freq_hz: Frequency array in Hz.
-        phase: Unwrapped phase array (radians).
-        trusted_range_thz: (f_low, f_high) in THz for linear fit.
-
-    Returns:
-        Phase offset at 0 Hz (radians), wrapped to [-π, π].
-    """
-    freq_thz = freq_hz / 1e12
-    mask = (freq_thz >= trusted_range_thz[0]) & (freq_thz <= trusted_range_thz[1])
-
-    if np.sum(mask) < 2:
-        return 0.0
-
-    # Linear fit: phase = a * freq_hz + b
-    coeffs = np.polyfit(freq_hz[mask], phase[mask], 1)
-    phase_at_0 = coeffs[1]  # y-intercept = phase at 0 Hz
-
-    # Wrap to [-π, π]
-    phase_at_0 = (phase_at_0 + PI) % (2 * PI) - PI
-
-    return float(phase_at_0)
+from .types import THzFrequencyDomainData
 
 
 def correct_phase_offset(
-    H_meas: NDArray[np.complex128],
-    freq_hz: NDArray[np.float64],
-    trusted_range_thz: tuple[float, float] = (0.3, 1.0),
-) -> NDArray[np.complex128]:
-    """Correct phase offset of measured transfer function.
+    freq_data: THzFrequencyDomainData,
+    ref_freq: THzFrequencyDomainData | None = None,
+) -> THzFrequencyDomainData:
+    """Remove linear phase offset from frequency-domain data.
 
-    Algorithm:
-    1. Extract unwrapped phase from H_meas
-    2. Linear fit in trusted frequency interval [f_low, f_high]
-    3. Extrapolate to 0 Hz to find phase offset
-    4. Subtract offset from all phases
-    5. Return corrected H_meas
+    Fits a line to the unwrapped phase in the low-frequency region and
+    subtracts the DC offset (phi_0) so that the phase starts near zero.
+
+    If ref_freq is provided, the correction is computed relative to the
+    reference phase (sample_phase - ref_phase), correcting only the
+    residual offset.
 
     Args:
-        H_meas: Measured complex transfer function.
-        freq_hz: Frequency array in Hz.
-        trusted_range_thz: (f_low, f_high) in THz for the linear fit region.
+        freq_data: Frequency-domain data to correct.
+        ref_freq: Optional reference for relative correction.
 
     Returns:
-        Phase-corrected transfer function (same shape as H_meas).
+        New THzFrequencyDomainData with corrected phase.
     """
-    # Work with valid (non-NaN) entries only
-    valid = ~np.isnan(H_meas)
-    if np.sum(valid) < 2:
-        return H_meas.copy()
+    phase = np.unwrap(np.angle(freq_data.spectrum))
+    freq_hz = freq_data.freq_hz
 
-    phase = np.zeros_like(freq_hz)
-    phase[valid] = np.unwrap(np.angle(H_meas[valid]))
+    if ref_freq is not None:
+        ref_phase = np.unwrap(np.angle(ref_freq.spectrum))
+        phase_diff = phase - ref_phase
+    else:
+        phase_diff = phase
 
-    offset = compute_phase_offset(freq_hz, phase, trusted_range_thz)
+    # Use low-frequency region (first 10% of positive frequencies) for fitting
+    n_fit = max(10, len(freq_hz) // 10)
+    # Skip DC (index 0) if present
+    start_idx = 1 if freq_hz[0] == 0 else 0
+    end_idx = start_idx + n_fit
 
-    # Apply correction: remove the offset
-    H_corrected = H_meas.copy()
-    H_corrected[valid] = np.abs(H_meas[valid]) * np.exp(
-        1j * (phase[valid] - offset)
+    if end_idx > len(freq_hz):
+        end_idx = len(freq_hz)
+
+    fit_freq = freq_hz[start_idx:end_idx]
+    fit_phase = phase_diff[start_idx:end_idx]
+
+    # Linear fit: phase = slope * freq + phi_0
+    if len(fit_freq) >= 2:
+        coeffs = np.polyfit(fit_freq, fit_phase, 1)
+        phi_0 = coeffs[1]  # DC offset
+    else:
+        phi_0 = phase_diff[start_idx] if start_idx < len(phase_diff) else 0.0
+
+    # Subtract only the DC offset (keep the linear/group delay component)
+    corrected_phase = phase - phi_0
+
+    # Reconstruct spectrum with corrected phase
+    amplitude = np.abs(freq_data.spectrum)
+    corrected_spectrum = amplitude * np.exp(1j * corrected_phase)
+
+    return THzFrequencyDomainData(
+        freq_hz=freq_data.freq_hz.copy(),
+        spectrum=corrected_spectrum,
     )
-
-    return H_corrected

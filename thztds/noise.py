@@ -1,105 +1,71 @@
-"""Noise floor detection and dynamic range analysis for THz-TDS.
+"""Noise floor detection and SNR analysis for THz-TDS spectra."""
 
-Based on TeraLyzer's noise floor detection (Jepsen & Fischer 2005):
-- Detects frequency where signal drops to noise floor
-- Computes dynamic range DR(f) and valid frequency mask
-"""
 from __future__ import annotations
 
 import numpy as np
 from numpy.typing import NDArray
 
-from .types import THzFrequencyDomainData, NoiseAnalysis
-from .constants import PI
-
-
-def estimate_noise_floor(
-    ref_freq: THzFrequencyDomainData,
-    tail_fraction: float = 0.1,
-) -> float:
-    """Estimate noise floor from high-frequency tail of reference spectrum.
-
-    Uses the last `tail_fraction` of the spectrum where signal is expected
-    to be dominated by noise.
-
-    Args:
-        ref_freq: Reference frequency-domain data.
-        tail_fraction: Fraction of spectrum to use for noise estimate (0-1).
-
-    Returns:
-        Noise floor amplitude (linear scale).
-    """
-    amp = ref_freq.amplitude
-    n_tail = max(1, int(len(amp) * tail_fraction))
-    return float(np.mean(amp[-n_tail:]))
-
-
-def compute_dynamic_range(
-    ref_freq: THzFrequencyDomainData,
-    noise_floor: float,
-) -> NDArray[np.float64]:
-    """Compute frequency-dependent dynamic range in dB.
-
-    DR(f) = 20 * log10(|E_ref(f)| / noise_floor)
-
-    Args:
-        ref_freq: Reference frequency-domain data.
-        noise_floor: Noise floor amplitude.
-
-    Returns:
-        Dynamic range array in dB, same length as ref_freq.freq_hz.
-    """
-    amp = ref_freq.amplitude
-    # Avoid log(0) by clipping
-    safe_amp = np.maximum(amp, noise_floor * 1e-10)
-    safe_noise = max(noise_floor, 1e-30)
-    return 20.0 * np.log10(safe_amp / safe_noise)
+from .types import THzFrequencyDomainData, ExtractionConfig, NoiseAnalysis
 
 
 def detect_noise_floor(
-    ref_freq: THzFrequencyDomainData,
-    dr_threshold_db: float = 10.0,
-    tail_fraction: float = 0.1,
+    freq_data: THzFrequencyDomainData,
+    config: ExtractionConfig,
 ) -> NoiseAnalysis:
-    """Detect noise floor and determine valid frequency range.
+    """Detect noise floor from frequency-domain spectrum.
 
-    Algorithm:
-    1. Estimate noise floor from high-frequency tail of reference spectrum
-    2. Compute DR(f) = 20*log10(|E_ref(f)| / noise_floor)
-    3. Valid frequencies are where DR(f) > threshold
+    Estimates the noise floor as the median amplitude in the high-frequency
+    tail (above freq_max_thz), where signal content is negligible.
 
     Args:
-        ref_freq: Reference frequency-domain data.
-        dr_threshold_db: Dynamic range threshold in dB (default: 10 dB).
-        tail_fraction: Fraction of spectrum for noise estimation.
+        freq_data: Frequency-domain THz data.
+        config: Extraction config (uses freq_min_thz, freq_max_thz).
 
     Returns:
-        NoiseAnalysis with noise floor, dynamic range, and valid mask.
+        NoiseAnalysis with noise floor, dynamic range, SNR, and valid mask.
     """
-    noise_floor = estimate_noise_floor(ref_freq, tail_fraction)
-    dr_db = compute_dynamic_range(ref_freq, noise_floor)
+    amplitude = np.abs(freq_data.spectrum)
+    freq_thz = freq_data.freq_hz / 1e12
 
-    # Valid frequency mask: DR above threshold
-    valid_mask = dr_db > dr_threshold_db
+    # Estimate noise floor from frequencies above the analysis band
+    noise_region = amplitude[freq_thz > config.freq_max_thz]
+    if len(noise_region) < 5:
+        # Fallback: use the highest 20% of frequency range
+        cutoff_idx = int(0.8 * len(amplitude))
+        noise_region = amplitude[cutoff_idx:]
 
-    # Find noise start frequency (first frequency where DR drops below threshold)
-    freq_thz = ref_freq.freq_hz / 1e12
+    noise_floor = float(np.median(noise_region))
+    if noise_floor <= 0:
+        noise_floor = float(np.min(amplitude[amplitude > 0]))
 
-    # Search from high frequency downward for the last valid point
-    valid_indices = np.where(valid_mask)[0]
-    if len(valid_indices) > 0:
-        noise_start_thz = float(freq_thz[valid_indices[-1]])
-    else:
-        noise_start_thz = 0.0
+    # Dynamic range in dB
+    with np.errstate(divide="ignore", invalid="ignore"):
+        dynamic_range_db = 20.0 * np.log10(amplitude / noise_floor)
+    dynamic_range_db = np.nan_to_num(dynamic_range_db, nan=0.0, neginf=0.0)
 
-    # Compute SNR spectrum
-    safe_noise = max(noise_floor, 1e-30)
-    snr = ref_freq.amplitude**2 / safe_noise**2
+    # SNR spectrum (linear)
+    with np.errstate(divide="ignore", invalid="ignore"):
+        snr_spectrum = amplitude / noise_floor
+    snr_spectrum = np.nan_to_num(snr_spectrum, nan=0.0)
+
+    # Valid frequency mask: within analysis range AND SNR > 1 (above noise)
+    in_range = (freq_thz >= config.freq_min_thz) & (freq_thz <= config.freq_max_thz)
+    valid_freq_mask = in_range & (snr_spectrum > 1.0)
+
+    # Find where noise becomes dominant (first crossing below SNR=1
+    # in the analysis range, scanning from low to high frequency)
+    noise_start_thz = config.freq_max_thz  # default: end of range
+    in_range_indices = np.where(in_range)[0]
+    if len(in_range_indices) > 0:
+        for idx in in_range_indices:
+            if snr_spectrum[idx] <= 1.0:
+                noise_start_thz = float(freq_thz[idx])
+                break
 
     return NoiseAnalysis(
         noise_floor=noise_floor,
         noise_start_thz=noise_start_thz,
-        dynamic_range_db=dr_db,
-        snr_spectrum=snr,
-        valid_freq_mask=valid_mask,
+        dynamic_range_db=dynamic_range_db,
+        snr_spectrum=snr_spectrum,
+        valid_freq_mask=valid_freq_mask,
     )

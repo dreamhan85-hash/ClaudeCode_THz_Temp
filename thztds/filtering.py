@@ -1,126 +1,111 @@
-"""Spatially Variant Moving Average Filter (SVMAF) for THz-TDS.
+"""Spatially Variant Moving Average Filter (SVMAF) for THz-TDS data."""
 
-Based on TeraLyzer/Pupeza et al.: frequency-dependent adaptive window
-that preserves features within confidence intervals while smoothing noise.
-"""
 from __future__ import annotations
 
 import numpy as np
 from numpy.typing import NDArray
 
-from .types import SvmafConfig
-
-
-def _compute_max_window_at_point(
-    values: NDArray[np.float64],
-    confidence: NDArray[np.float64],
-    idx: int,
-    max_half_width: int,
-) -> int:
-    """Find the largest symmetric window centered at idx whose average stays within confidence.
-
-    Returns the half-width (number of points on each side).
-    """
-    n = len(values)
-    center_val = values[idx]
-    center_ci = confidence[idx]
-
-    for hw in range(1, max_half_width + 1):
-        lo = max(0, idx - hw)
-        hi = min(n, idx + hw + 1)
-        avg = np.mean(values[lo:hi])
-
-        # Check if the averaged value stays within the confidence interval
-        if abs(avg - center_val) > center_ci:
-            return max(1, hw - 1)
-
-    return max_half_width
+from .types import OpticalProperties, SvmafConfig
 
 
 def svmaf_filter(
-    values: NDArray[np.float64],
+    data: NDArray[np.float64],
     confidence: NDArray[np.float64],
-    config: SvmafConfig | None = None,
+    config: SvmafConfig = SvmafConfig(),
 ) -> NDArray[np.float64]:
     """Apply Spatially Variant Moving Average Filter.
 
-    At each frequency point, finds the largest symmetric moving average window
-    such that the filtered value remains within the confidence interval of
-    the original value. Near sharp features (e.g., absorption peaks), the
-    window shrinks automatically; in flat regions, it widens for smoothing.
+    The window size at each point is inversely proportional to the
+    local confidence. High-confidence points get minimal smoothing;
+    low-confidence points get stronger smoothing.
 
     Args:
-        values: Array of optical property values (n, kappa, or alpha).
-        confidence: Confidence interval half-width at each frequency point.
-            Filtered values must satisfy |filtered - original| <= confidence.
-        config: SVMAF configuration. Uses defaults if None.
+        data: 1D array to filter.
+        confidence: Confidence weights (e.g., SNR or 1/std). Must be
+            same length as data. Higher = more confident = less smoothing.
+        config: SVMAF parameters.
 
     Returns:
-        Filtered values array (same shape as input).
+        Filtered 1D array.
     """
-    if config is None:
-        config = SvmafConfig()
-
-    n = len(values)
+    n = len(data)
     if n == 0:
-        return values.copy()
+        return data.copy()
 
-    max_half_width = config.max_window_size // 2
-    filtered = np.zeros_like(values)
+    filtered = np.empty(n)
+
+    # Normalize confidence to [0, 1]
+    c_max = np.max(confidence)
+    if c_max > 0:
+        c_norm = confidence / c_max
+    else:
+        c_norm = np.ones(n)
+
+    max_w = config.max_window_size
 
     for i in range(n):
-        hw = _compute_max_window_at_point(values, confidence, i, max_half_width)
-        lo = max(0, i - hw)
-        hi = min(n, i + hw + 1)
-        filtered[i] = np.mean(values[lo:hi])
+        # Window half-width: inversely proportional to confidence
+        # High confidence → small window; low confidence → large window
+        half_w = int(max_w * (1.0 - c_norm[i]) / 2.0)
+        half_w = max(half_w, 0)
+
+        lo = max(0, i - half_w)
+        hi = min(n, i + half_w + 1)
+
+        # Weighted average using confidence as weights
+        segment = data[lo:hi]
+        weights = confidence[lo:hi]
+        w_sum = np.sum(weights)
+
+        if w_sum > 0:
+            filtered[i] = np.sum(segment * weights) / w_sum
+        else:
+            filtered[i] = data[i]
 
     return filtered
 
 
-def compute_confidence_from_std(
-    std: NDArray[np.float64],
-    sigma: float = 2.0,
-) -> NDArray[np.float64]:
-    """Convert standard deviation to confidence interval half-width.
-
-    Args:
-        std: Standard deviation array from replicate measurements.
-        sigma: Number of standard deviations for confidence (default: 2.0 = ~95%).
-
-    Returns:
-        Confidence interval half-width array.
-    """
-    return std * sigma
-
-
 def svmaf_filter_properties(
-    values: NDArray[np.float64],
-    std: NDArray[np.float64] | None = None,
-    config: SvmafConfig | None = None,
-) -> NDArray[np.float64]:
-    """Convenience function: filter optical property with automatic confidence.
+    props: OpticalProperties,
+    config: SvmafConfig = SvmafConfig(),
+) -> OpticalProperties:
+    """Apply SVMAF to all optical properties (n, kappa, alpha).
 
-    If std is not available, uses a fraction of the value range as fallback.
+    Uses the inverse of local standard deviation (if available) or
+    uniform confidence as the confidence metric.
 
     Args:
-        values: Optical property values to filter.
-        std: Standard deviation from replicates (optional).
+        props: Optical properties to filter.
         config: SVMAF configuration.
 
     Returns:
-        Filtered values.
+        New OpticalProperties with filtered n, kappa, alpha.
     """
-    if config is None:
-        config = SvmafConfig()
-
-    if std is not None and np.any(std > 0):
-        confidence = compute_confidence_from_std(std, config.confidence_sigma)
+    # Build confidence from std if available, otherwise uniform
+    if props.n_std is not None and np.any(props.n_std > 0):
+        confidence_n = 1.0 / np.maximum(props.n_std, 1e-12)
     else:
-        # Fallback: use 2% of value range as confidence
-        val_range = np.ptp(values)
-        if val_range > 0:
-            confidence = np.full_like(values, 0.02 * val_range)
-        else:
-            return values.copy()
+        confidence_n = np.ones_like(props.n)
 
-    return svmaf_filter(values, confidence, config)
+    if props.kappa_std is not None and np.any(props.kappa_std > 0):
+        confidence_k = 1.0 / np.maximum(props.kappa_std, 1e-12)
+    else:
+        confidence_k = np.ones_like(props.kappa)
+
+    if props.alpha_std is not None and np.any(props.alpha_std > 0):
+        confidence_a = 1.0 / np.maximum(props.alpha_std, 1e-12)
+    else:
+        confidence_a = np.ones_like(props.alpha)
+
+    return OpticalProperties(
+        freq_hz=props.freq_hz.copy(),
+        n=svmaf_filter(props.n, confidence_n, config),
+        kappa=svmaf_filter(props.kappa, confidence_k, config),
+        alpha=svmaf_filter(props.alpha, confidence_a, config),
+        thickness_mm=props.thickness_mm,
+        temperature_c=props.temperature_c,
+        replicate=props.replicate,
+        n_std=props.n_std.copy() if props.n_std is not None else None,
+        kappa_std=props.kappa_std.copy() if props.kappa_std is not None else None,
+        alpha_std=props.alpha_std.copy() if props.alpha_std is not None else None,
+    )
