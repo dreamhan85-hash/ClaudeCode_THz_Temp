@@ -1,7 +1,5 @@
 __pycache__/
 *.pyc
 *.pyo
-.claude/
-MeaData/
-*.pdf
 .DS_Store
+.pytest_cache/
