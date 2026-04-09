@@ -1,0 +1,13 @@
+Rank,Feature,Domain,R,R2,p-value,Slope (/C),Significance
+1,rise_time_ps,Time,-0.975,0.951,1.62e-06,-1.2045e-04,***
+2,centroid_sam,Frequency,+0.964,0.929,7.25e-06,5.4612e-05,***
+3,env_fwhm,Envelope,-0.889,0.791,5.77e-04,-1.2166e-04,***
+4,env_asymmetry,Envelope,-0.881,0.776,7.63e-04,-1.2114e-04,***
+5,dt_avg,Time,-0.879,0.773,8.02e-04,-7.6031e-02,***
+6,dt_pos,Time,-0.879,0.772,8.18e-04,-6.6765e-02,***
+7,dt_neg,Time,-0.842,0.709,2.25e-03,-8.5296e-02,**
+8,group_delay_ps,Frequency,-0.789,0.622,6.72e-03,-6.6033e-05,**
+9,delta_rms,Delta,-0.667,0.445,3.50e-02,-3.2299e-04,*
+10,amp_ratio_neg,Time,-0.374,0.140,2.87e-01,-1.8658e-05,
+11,p2p_ratio,Time,-0.318,0.101,3.71e-01,-1.5186e-05,
+12,amp_ratio_pos,Time,-0.194,0.038,5.92e-01,-9.8061e-06,

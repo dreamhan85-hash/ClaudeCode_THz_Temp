@@ -1,0 +1,17 @@
+[Proxy]
+useProxy = false
+ProxyServer = name.of.proxy.server
+ProxyPort = 8080
+
+
+[Import]
+time_col = 1
+data_col_1 = 2
+data_col_2 = 2
+file_type = *.*
+norm_time_by = 1e12
+header_rows = 0
+col_delimiter = \t
+resample_opt = 0
+resample_time = 50e-15
+

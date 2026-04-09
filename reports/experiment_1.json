@@ -1,0 +1,59 @@
+{
+  "experiment_n": 1,
+  "title": "PE40 THz-TDS Temperature Analysis + ML Prediction (Final v7)",
+  "status": "completed",
+  "date": "2026-04-08",
+
+  "paper": {
+    "target_journal": "Sensors and Actuators A: Physical",
+    "body_words": 6065,
+    "references": 29,
+    "figures": "Fig.1-10 + A1 + Scheme 1",
+    "tables": 10,
+    "equations": "Eq.(1-7)",
+    "structure": "Highlights, Abstract, Intro, Methods(5), Results(7), Discussion(4), Conclusions, Appendix A+B"
+  },
+
+  "analysis_pipeline": {
+    "method": "Matched Reference THz-TDS, 2-phase Bruggeman EMA",
+    "s4s5_correction": "global offset Δn=0.106, turret position alignment",
+    "best_freq_thz": [0.454, 1.095, 1.630],
+    "n_20c": 1.4282, "n_100c": 1.3515,
+    "n_offset_2sheet": 0.1464,
+    "porosity_20c_pct": 44.0, "porosity_110c_pct": 55.7,
+    "T_onset_c": 55.2,
+    "T_break_c": 51.8,
+    "regime1_eq": "n = 1.452 - 1.52e-3 T (R²=0.987)",
+    "regime2_eq": "n = 1.373 - 3.24e-4 T (R²=0.476)",
+    "beta_per_c": 3.50e-3,
+    "sigma_n_post_correction": 0.014,
+    "anova_0.45thz": {"F": 12.78, "p": 2.84e-9, "eta_sq": 0.742},
+    "freq_scan_significant_pct": 97.4,
+    "drift_spectral_max_pct": 0.6,
+    "bootstrap_ci_20c": [1.411, 1.443],
+    "bootstrap_ci_100c": [1.340, 1.360],
+    "sigma_porosity_total_pct": "4.6-5.9"
+  },
+
+  "ml_pipeline": {
+    "features_total": 37,
+    "features_selected": 15,
+    "vif_threshold": 10,
+    "nonzero_lasso_coefs": 13,
+    "lasso_alpha": 0.1,
+    "lasso_alpha_selection": "5-fold CV",
+    "cv_method": "LOTO-CV (10-fold, N_train=45, N_test=5)",
+    "best_model": "Lasso",
+    "loto_r2": 0.955, "loto_mae": 5.08,
+    "loo_r2": 0.975, "loo_mae": 3.71,
+    "delta_r2_loo_loto": 0.020,
+    "ablation_single_best_r2": 0.666,
+    "top3_features": ["phase_slope_low (+14.5)", "spec_mean_low (+11.0)", "spec_centroid (+4.0)"]
+  },
+
+  "review_history": {
+    "cycles_completed": 5,
+    "final_verdict": "Conditional Accept",
+    "remaining_actions_applied": true
+  }
+}
