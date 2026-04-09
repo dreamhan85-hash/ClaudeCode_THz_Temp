@@ -552,49 +552,37 @@ def fig01_time_domain_zoom(refs, samples):
 
 
 def fig02_peak_detail(refs, samples):
-    """Separated reference and sample peak overlays by temperature."""
-    print("Fig.2: Peak detail (Ref + Sample separated)...")
-    fig, axes = plt.subplots(2, 2, figsize=(DOUBLE_COL_W, DOUBLE_COL_H * 1.5))
+    """Sample peak overlay (2-panel) with Ref 20°C as dashed baseline."""
+    print("Fig.2: Peak detail (2-panel, Sample + Ref dashed)...")
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(DOUBLE_COL_W, DOUBLE_COL_H * 0.75))
 
     ref20 = refs[20]
     tf_20, sf_20, _ = interp_signal(ref20.time_ps, ref20.signal)
     t0 = tf_20[np.argmax(sf_20)]
     neg_t = tf_20[np.argmin(sf_20)] - t0
 
-    # Top row: Reference signals at all temperatures
-    for temp in TEMPS:
-        if temp not in refs:
-            continue
-        ref = refs[temp]
-        axes[0, 0].plot(ref.time_ps - t0, ref.signal, color=get_temp_color(temp), lw=0.6)
-        axes[0, 1].plot(ref.time_ps - t0, ref.signal, color=get_temp_color(temp), lw=0.6)
-
-    # Bottom row: Sample signals (S1) at all temperatures
     for temp in TEMPS:
         key = (temp, 1)
         if key not in samples:
             continue
         td = samples[key]
-        axes[1, 0].plot(td.time_ps - t0, td.signal, color=get_temp_color(temp), lw=0.6)
-        axes[1, 1].plot(td.time_ps - t0, td.signal, color=get_temp_color(temp), lw=0.6)
+        ax1.plot(td.time_ps - t0, td.signal, color=get_temp_color(temp), lw=0.6)
+        ax2.plot(td.time_ps - t0, td.signal, color=get_temp_color(temp), lw=0.6)
 
-    # Set axis limits and labels
-    for col, (xlim, title_suffix) in enumerate([
-        ((-0.3, 0.5), "Positive peak"),
-        ((neg_t - 0.3, neg_t + 0.3), "Negative peak"),
-    ]):
-        for row, label in enumerate(["Reference", "Sample (S1)"]):
-            ax = axes[row, col]
-            ax.set_xlim(xlim)
-            auto_ylim(ax)
-            ax.set_title(f"{label} \u2014 {title_suffix}", fontsize=9)
-            if row == 1:
-                ax.set_xlabel("Time (ps)")
-            if col == 0:
-                ax.set_ylabel("Amplitude (a.u.)")
+    ax1.plot(ref20.time_ps - t0, ref20.signal, "k--", lw=1.0, label="Ref (20 \u00b0C)")
+    ax2.plot(ref20.time_ps - t0, ref20.signal, "k--", lw=1.0)
 
-    make_temp_colorbar(axes[0, 1], fig)
-    fig.tight_layout(w_pad=1.0, h_pad=1.2)
+    ax1.set_xlim(-0.3, 0.5)
+    ax2.set_xlim(neg_t - 0.3, neg_t + 0.3)
+    for ax in [ax1, ax2]:
+        auto_ylim(ax)
+        ax.set_xlabel("Time (ps)")
+    ax1.set_ylabel("Amplitude (a.u.)")
+    ax1.set_title("(a) Positive peak", fontsize=10)
+    ax2.set_title("(b) Negative peak", fontsize=10)
+    ax1.legend(fontsize=7, loc="upper right")
+    make_temp_colorbar(ax2, fig)
+    fig.tight_layout(w_pad=1.5)
     save_fig(fig, "fig02_peak_detail")
 
 
@@ -1004,7 +992,7 @@ def fig11_phase_spectrum(refs, samples):
         phase_smooth = median_filter(phase_diff, size=5)
         ax1.plot(freq_thz[valid], phase_smooth, color=get_temp_color(temp), lw=0.6)
         h_mag = np.abs(H[valid])
-        h_smooth = median_filter(h_mag, size=5)
+        h_smooth = median_filter(h_mag, size=9)
         ax2.plot(freq_thz[valid], h_smooth, color=get_temp_color(temp), lw=0.6)
 
     ax1.set_xlabel("Frequency (THz)")

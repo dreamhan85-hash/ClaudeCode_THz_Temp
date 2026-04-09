@@ -1,5 +1,5 @@
 {
-  "iteration": 434,
+  "iteration": 436,
   "max_iterations": 200,
   "started_at": "2026-04-03T20:19:55.795773",
   "best_score": 100,
@@ -2718,6 +2718,18 @@
       "iteration": 434,
       "score": 100,
       "file": "generate_paper_sna_ko.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 435,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
+      "n_features": 108
+    },
+    {
+      "iteration": 436,
+      "score": 100,
+      "file": "analyze_pe40_paper.py",
       "n_features": 108
     }
   ]
